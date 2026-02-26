@@ -4,8 +4,8 @@ import AppHeader from "@/components/AppHeader";
 
 const menuItems = [
   {
-    title: "Peladeiros",
-    description: "Cadastro e manutenção dos peladeiros",
+    title: "Jogadores",
+    description: "Cadastro e gestão dos jogadores",
     icon: Users,
     path: "/players",
   },

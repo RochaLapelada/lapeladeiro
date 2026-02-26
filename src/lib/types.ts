@@ -7,6 +7,7 @@ export interface Player {
   position: PlayerPosition;
   positions: string[]; // detailed positions like ZG, VOL, etc.
   status: "active" | "inactive";
+  star: boolean; // destaque/estrela
   goals: number;
   ownGoals: number;
   yellowCards: number;

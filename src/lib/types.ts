@@ -1,10 +1,14 @@
+export type PlayerPosition = "Goleiro" | "Linha";
+
 export interface Player {
   id: string;
   name: string;
-  rating: number; // 1-5 stars
-  positions: string[];
+  rating: number; // 1-3 stars
+  position: PlayerPosition;
+  positions: string[]; // detailed positions like ZG, VOL, etc.
   status: "active" | "inactive";
   goals: number;
+  ownGoals: number;
   yellowCards: number;
   redCards: number;
   matches: number;
@@ -16,7 +20,7 @@ export interface Player {
 
 export interface MatchEvent {
   id: string;
-  type: "goal" | "yellow_card" | "red_card" | "substitution";
+  type: "goal" | "own_goal" | "yellow_card" | "red_card" | "substitution" | "removed" | "quit";
   playerId: string;
   team: "home" | "away";
   minute: number;
@@ -34,7 +38,7 @@ export interface Match {
   awayPlayers: string[];
   events: MatchEvent[];
   status: "pending" | "in_progress" | "finished";
-  duration: number; // seconds
+  duration: number;
 }
 
 export interface Team {

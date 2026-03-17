@@ -173,32 +173,32 @@ const PlayersPage = () => {
               onClick={() => openActions(player)}
               className={`w-full flex items-center gap-3 px-4 py-3 transition-colors text-left ${
                 isClutch
-                  ? "bg-destructive/10 border-l-4 border-l-destructive"
+                  ? "bg-gold/10 border-l-4 border-l-gold animate-fire-glow"
                   : isGoalkeeper
                   ? "bg-accent/20"
                   : "bg-card"
               } hover:bg-secondary/50`}
             >
               <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden ${
-                isClutch ? "bg-destructive/20" : isGoalkeeper ? "bg-accent/30" : "bg-muted"
+                isClutch ? "bg-gold/20 animate-fire-float" : isGoalkeeper ? "bg-accent/30" : "bg-muted"
               }`}>
                 {isGoalkeeper ? (
                   <span className="text-xl">🧤</span>
                 ) : isClutch ? (
-                  <span className="text-xl">🔥</span>
+                  <span className="text-xl animate-fire-float">🔥</span>
                 ) : (
                   <UserCircle className="text-muted-foreground" size={36} />
                 )}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <p className={`font-bold truncate ${isClutch ? "text-destructive" : "text-card-foreground"}`}>{player.name}</p>
-                  {player.star && <Star className="fill-yellow-500 text-yellow-500 shrink-0" size={16} />}
+                  <p className={`font-bold truncate ${isClutch ? "text-gold-dark" : "text-card-foreground"}`}>{player.name}</p>
+                  {player.star && <Star className="fill-gold text-gold-dark shrink-0 animate-star-pulse" size={16} />}
                   {isGoalkeeper && (
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-accent text-accent-foreground shrink-0">GOLEIRO</span>
                   )}
                   {isClutch && (
-                    <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-destructive text-destructive-foreground shrink-0">CRAQUE</span>
+                    <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-gold text-gold-dark shrink-0 animate-pulse-soft">⭐ CRAQUE</span>
                   )}
                 </div>
                 <StarRating rating={player.rating ?? player.skills?.length ?? 2} />

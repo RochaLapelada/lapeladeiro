@@ -1,13 +1,24 @@
 export type PlayerPosition = "Goleiro" | "Linha";
 
+export const SKILL_CRITERIA = [
+  { id: "shooting", label: "Chuta bem", icon: "🎯" },
+  { id: "scoring", label: "Faz bastante gol", icon: "⚽" },
+  { id: "defending", label: "Ajuda na marcação", icon: "🛡️" },
+  { id: "teamwork", label: "Joga em equipe", icon: "🤝" },
+  { id: "clutch", label: "Resolve a partida", icon: "🔥" },
+] as const;
+
+export type SkillId = typeof SKILL_CRITERIA[number]["id"];
+
 export interface Player {
   id: string;
   name: string;
-  rating: number; // 1-3 stars
+  rating: number; // 0-5 based on skills count
+  skills: SkillId[]; // which criteria the player meets
   position: PlayerPosition;
-  positions: string[]; // detailed positions like ZG, VOL, etc.
+  positions: string[];
   status: "active" | "inactive";
-  star: boolean; // destaque/estrela
+  star: boolean;
   goals: number;
   ownGoals: number;
   yellowCards: number;

@@ -17,10 +17,11 @@ const StarRating = ({ rating, max = 5, size = 14 }: StarRatingProps) => {
           className={
             i < rating
               ? isClutch
-                ? "fill-destructive text-destructive"
-                : "fill-accent text-accent"
+                ? "fill-gold text-gold-dark animate-star-pulse"
+                : "fill-gold text-gold-dark"
               : "text-muted-foreground/30"
           }
+          style={isClutch && i < rating ? { animationDelay: `${i * 0.15}s` } : undefined}
         />
       ))}
     </div>

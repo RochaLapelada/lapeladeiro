@@ -197,16 +197,6 @@ const PlayersPage = () => {
                 ))}
               </div>
             </div>
-            {newPosition === "Linha" && (
-              <Select value={newDetailPos} onValueChange={setNewDetailPos}>
-                <SelectTrigger><SelectValue placeholder="Posição detalhada" /></SelectTrigger>
-                <SelectContent>
-                  {DETAIL_POSITIONS.filter(p => p !== "GL").map((pos) => (
-                    <SelectItem key={pos} value={pos}>{pos}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
             <Select value={newRating} onValueChange={setNewRating}>
               <SelectTrigger><SelectValue placeholder="Nível" /></SelectTrigger>
               <SelectContent>
@@ -270,16 +260,6 @@ const PlayersPage = () => {
                 ))}
               </div>
             </div>
-            {editPosition === "Linha" && (
-              <Select value={editDetailPos} onValueChange={setEditDetailPos}>
-                <SelectTrigger><SelectValue placeholder="Posição detalhada" /></SelectTrigger>
-                <SelectContent>
-                  {DETAIL_POSITIONS.filter(p => p !== "GL").map((pos) => (
-                    <SelectItem key={pos} value={pos}>{pos}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
             <Select value={editRating} onValueChange={setEditRating}>
               <SelectTrigger><SelectValue placeholder="Nível" /></SelectTrigger>
               <SelectContent>

@@ -230,15 +230,6 @@ const PlayersPage = () => {
               </div>
             </div>
             <SkillSelector skills={newSkills} onChange={setNewSkills} />
-            <div>
-              <label className="text-sm font-semibold text-card-foreground mb-1 block">Estrela (Destaque)</label>
-              <div className="flex gap-2">
-                <button onClick={() => setNewStar(false)}
-                  className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-colors ${!newStar ? "border-primary bg-primary/10 text-primary" : "border-border bg-card text-muted-foreground"}`}>Não</button>
-                <button onClick={() => setNewStar(true)}
-                  className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-colors ${newStar ? "border-yellow-500 bg-yellow-500/10 text-yellow-600" : "border-border bg-card text-muted-foreground"}`}>⭐ Sim</button>
-              </div>
-            </div>
             <Button onClick={handleAdd} className="w-full">Salvar</Button>
           </div>
         </DialogContent>
@@ -284,15 +275,6 @@ const PlayersPage = () => {
               </div>
             </div>
             <SkillSelector skills={editSkills} onChange={setEditSkills} />
-            <div>
-              <label className="text-sm font-semibold text-card-foreground mb-1 block">Estrela (Destaque)</label>
-              <div className="flex gap-2">
-                <button onClick={() => setEditStar(false)}
-                  className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-colors ${!editStar ? "border-primary bg-primary/10 text-primary" : "border-border bg-card text-muted-foreground"}`}>Não</button>
-                <button onClick={() => setEditStar(true)}
-                  className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-colors ${editStar ? "border-yellow-500 bg-yellow-500/10 text-yellow-600" : "border-border bg-card text-muted-foreground"}`}>⭐ Sim</button>
-              </div>
-            </div>
             <div className="flex gap-2">
               <Button variant="outline" className="flex-1" onClick={() => setShowEditDialog(false)}>Cancelar</Button>
               <Button className="flex-1" onClick={handleEdit}>Salvar Alterações</Button>

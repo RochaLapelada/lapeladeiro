@@ -120,7 +120,7 @@ const PlayersPage = () => {
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 text-left text-sm font-medium transition-colors ${
                 checked
                   ? isClutch
-                    ? "border-destructive bg-destructive/10 text-destructive"
+                    ? "border-gold bg-gold/10 text-gold-dark"
                     : "border-primary bg-primary/10 text-primary"
                   : "border-border bg-card text-muted-foreground"
               }`}

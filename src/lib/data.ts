@@ -34,7 +34,7 @@ export function addPlayer(player: Omit<Player, "id" | "goals" | "ownGoals" | "ye
     ...player,
     id: Date.now().toString(),
     star: player.star ?? false,
-    skills: player.skills ?? ["defending", "teamwork"],
+    skills: player.skills ?? (player.position === "Goleiro" ? ["gk_saves", "gk_no_blunder"] : ["defending", "teamwork"]),
     rating: player.skills?.length ?? 2,
     goals: 0, ownGoals: 0, yellowCards: 0, redCards: 0, matches: 0, wins: 0, losses: 0, draws: 0,
   };

@@ -278,7 +278,7 @@ const PlayersPage = () => {
                 ))}
               </div>
             </div>
-            <SkillSelector skills={editSkills} onChange={setEditSkills} />
+            <SkillSelector skills={editSkills} onChange={setEditSkills} position={editPosition} />
             <div className="flex gap-2">
               <Button variant="outline" className="flex-1" onClick={() => setShowEditDialog(false)}>Cancelar</Button>
               <Button className="flex-1" onClick={handleEdit}>Salvar Alterações</Button>

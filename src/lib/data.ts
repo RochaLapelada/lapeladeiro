@@ -14,7 +14,7 @@ const defaultPlayers: Player[] = [
   { id: "8", name: "Isaac F. Martins", rating: 2, skills: ["defending", "teamwork"], position: "Linha", positions: ["VOL"], status: "active", star: false, goals: 4, ownGoals: 0, yellowCards: 2, redCards: 0, matches: 22, wins: 6, losses: 8, draws: 3 },
   { id: "9", name: "Celso Moreira", rating: 5, skills: ["shooting", "scoring", "defending", "teamwork", "clutch"], position: "Linha", positions: ["ATA"], status: "active", star: true, goals: 20, ownGoals: 0, yellowCards: 0, redCards: 0, matches: 38, wins: 13, losses: 10, draws: 5 },
   { id: "10", name: "Alex", rating: 2, skills: ["defending", "teamwork"], position: "Linha", positions: ["SA"], status: "active", star: false, goals: 7, ownGoals: 0, yellowCards: 1, redCards: 0, matches: 25, wins: 7, losses: 9, draws: 3 },
-  { id: "11", name: "Roberto Carlos", rating: 3, skills: ["shooting", "defending", "teamwork"], position: "Goleiro", positions: ["GL"], status: "active", star: false, goals: 0, ownGoals: 0, yellowCards: 0, redCards: 0, matches: 42, wins: 18, losses: 10, draws: 6 },
+  { id: "11", name: "Roberto Carlos", rating: 3, skills: ["gk_saves", "gk_no_blunder", "gk_feet"], position: "Goleiro", positions: ["GL"], status: "active", star: false, goals: 0, ownGoals: 0, yellowCards: 0, redCards: 0, matches: 42, wins: 18, losses: 10, draws: 6 },
 ];
 
 export function getPlayers(): Player[] {

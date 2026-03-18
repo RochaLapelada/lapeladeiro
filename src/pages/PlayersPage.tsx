@@ -176,33 +176,33 @@ const PlayersPage = () => {
             <button
               key={player.id}
               onClick={() => openActions(player)}
-              className={`w-full flex items-center gap-3 px-4 py-3 transition-colors text-left ${
-                isClutch
-                  ? "bg-gold/10 border-l-4 border-l-gold animate-fire-glow"
-                  : isGoalkeeper
-                  ? "bg-accent/20"
-                  : "bg-card"
-              } hover:bg-secondary/50`}
-            >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden ${
-                isClutch ? "bg-gold/20 animate-fire-float" : isGoalkeeper ? "bg-accent/30" : "bg-muted"
-              }`}>
-                {isClutch ? (
-                  <span className="text-xl animate-fire-float">{isGoalkeeper ? "🧤" : "🔥"}</span>
-                ) : isGoalkeeper ? (
-                  <span className="text-xl">🧤</span>
-                ) : (
-                  <UserCircle className="text-muted-foreground" size={36} />
-                )}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1.5">
-                  <p className={`font-bold truncate ${isClutch ? "text-gold-dark" : "text-card-foreground"}`}>{player.name}</p>
-                  {player.star && <Star className="fill-gold text-gold-dark shrink-0 animate-star-pulse" size={16} />}
-                  {isGoalkeeper && (
-                    <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-accent text-accent-foreground shrink-0">GOLEIRO</span>
-                  )}
-                  {isClutch && (
+               className={`w-full flex items-center gap-3 px-4 py-3 transition-colors text-left ${
+                 isClutch
+                   ? "bg-gold/10 border-l-4 border-l-gold animate-fire-glow"
+                   : "bg-card"
+               } hover:bg-secondary/50`}
+             >
+               <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden ${
+                 isClutch ? "bg-gold/20 animate-fire-float" : isGoalkeeper ? "bg-secondary" : "bg-muted"
+               }`}>
+                 {isClutch ? (
+                   <span className="text-xl animate-fire-float">{isGoalkeeper ? "🧤" : "🔥"}</span>
+                 ) : isGoalkeeper ? (
+                   <span className="text-xl">🧤</span>
+                 ) : (
+                   <UserCircle className="text-muted-foreground" size={36} />
+                 )}
+               </div>
+               <div className="flex-1 min-w-0">
+                 <div className="flex items-center gap-1.5">
+                   <p className={`font-bold truncate ${isClutch ? "text-gold-dark" : "text-card-foreground"}`}>{player.name}</p>
+                   {player.star && <Star className="fill-gold text-gold-dark shrink-0 animate-star-pulse" size={16} />}
+                   {isGoalkeeper && (
+                     <span className={`text-[10px] font-black px-1.5 py-0.5 rounded shrink-0 ${isClutch ? "bg-gold text-gold-dark" : "bg-secondary text-secondary-foreground"}`}>
+                       GOLEIRO
+                     </span>
+                   )}
+                   {isClutch && (
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-gold text-gold-dark shrink-0 animate-pulse-soft">⭐ CRAQUE</span>
                   )}
                 </div>

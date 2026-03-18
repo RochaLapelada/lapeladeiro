@@ -18,7 +18,13 @@ export const GOALKEEPER_SKILL_CRITERIA = [
 
 export const SKILL_CRITERIA = FIELD_SKILL_CRITERIA;
 
-export type SkillId = typeof SKILL_CRITERIA[number]["id"];
+export type FieldSkillId = typeof FIELD_SKILL_CRITERIA[number]["id"];
+export type GoalkeeperSkillId = typeof GOALKEEPER_SKILL_CRITERIA[number]["id"];
+export type SkillId = FieldSkillId | GoalkeeperSkillId;
+
+export function getSkillCriteriaForPosition(position: PlayerPosition) {
+  return position === "Goleiro" ? GOALKEEPER_SKILL_CRITERIA : FIELD_SKILL_CRITERIA;
+}
 
 export interface Player {
   id: string;

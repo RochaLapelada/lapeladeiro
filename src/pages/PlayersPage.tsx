@@ -187,10 +187,10 @@ const PlayersPage = () => {
               <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden ${
                 isClutch ? "bg-gold/20 animate-fire-float" : isGoalkeeper ? "bg-accent/30" : "bg-muted"
               }`}>
-                {isGoalkeeper ? (
+                {isClutch ? (
+                  <span className="text-xl animate-fire-float">{isGoalkeeper ? "🧤" : "🔥"}</span>
+                ) : isGoalkeeper ? (
                   <span className="text-xl">🧤</span>
-                ) : isClutch ? (
-                  <span className="text-xl animate-fire-float">🔥</span>
                 ) : (
                   <UserCircle className="text-muted-foreground" size={36} />
                 )}

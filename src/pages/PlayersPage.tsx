@@ -103,41 +103,45 @@ const PlayersPage = () => {
     setActionPlayer(null);
   };
 
-  const SkillSelector = ({ skills, onChange }: { skills: SkillId[]; onChange: (s: SkillId[]) => void }) => (
-    <div>
-      <label className="text-sm font-semibold text-card-foreground mb-2 block">
-        Nível do Jogador ({skills.length}/5 ⭐)
-      </label>
-      <div className="space-y-2">
-        {SKILL_CRITERIA.map((criteria) => {
-          const checked = skills.includes(criteria.id);
-          const isClutch = criteria.id === "clutch";
-          return (
-            <button
-              key={criteria.id}
-              type="button"
-              onClick={() => onChange(toggleSkill(skills, criteria.id))}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 text-left text-sm font-medium transition-colors ${
-                checked
-                  ? isClutch
-                    ? "border-gold bg-gold/10 text-gold-dark"
-                    : "border-primary bg-primary/10 text-primary"
-                  : "border-border bg-card text-muted-foreground"
-              }`}
-            >
-              <Checkbox checked={checked} className="pointer-events-none" />
-              <span className="text-base">{criteria.icon}</span>
-              <span className="flex-1">{criteria.label}</span>
-              {isClutch && checked && <span className="text-xs font-black">🔥 CRAQUE</span>}
-            </button>
-          );
-        })}
+  const SkillSelector = ({ skills, onChange, position }: { skills: SkillId[]; onChange: (s: SkillId[]) => void; position: PlayerPosition }) => {
+    const criteria = getSkillCriteriaForPosition(position);
+    const isGoalkeeper = position === "Goleiro";
+    return (
+      <div>
+        <label className="text-sm font-semibold text-card-foreground mb-2 block">
+          {isGoalkeeper ? "Nível do Goleiro" : "Nível do Jogador"} ({skills.length}/5 ⭐)
+        </label>
+        <div className="space-y-2">
+          {criteria.map((c) => {
+            const checked = skills.includes(c.id as SkillId);
+            const isTop = isGoalkeeper ? c.id === "gk_best" : c.id === "clutch";
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => onChange(toggleSkill(skills, c.id as SkillId))}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 text-left text-sm font-medium transition-colors ${
+                  checked
+                    ? isTop
+                      ? "border-gold bg-gold/10 text-gold-dark"
+                      : "border-primary bg-primary/10 text-primary"
+                    : "border-border bg-card text-muted-foreground"
+                }`}
+              >
+                <Checkbox checked={checked} className="pointer-events-none" />
+                <span className="text-base">{c.icon}</span>
+                <span className="flex-1">{c.label}</span>
+                {isTop && checked && <span className="text-xs font-black">{isGoalkeeper ? "👑 CRAQUE" : "🔥 CRAQUE"}</span>}
+              </button>
+            );
+          })}
+        </div>
+        <div className="mt-2">
+          <StarRating rating={skills.length} />
+        </div>
       </div>
-      <div className="mt-2">
-        <StarRating rating={skills.length} />
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto">

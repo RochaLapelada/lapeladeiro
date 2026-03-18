@@ -170,7 +170,8 @@ const PlayersPage = () => {
       <main className="flex-1 divide-y divide-border mt-2">
         {filtered.map((player) => {
           const isGoalkeeper = player.position === "Goleiro";
-          const isClutch = player.rating === 5;
+          const playerRating = player.skills?.length ?? player.rating ?? 0;
+          const isClutch = playerRating === 5;
           return (
             <button
               key={player.id}
@@ -186,10 +187,10 @@ const PlayersPage = () => {
               <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden ${
                 isClutch ? "bg-gold/20 animate-fire-float" : isGoalkeeper ? "bg-accent/30" : "bg-muted"
               }`}>
-                {isGoalkeeper ? (
+                {isClutch ? (
+                  <span className="text-xl animate-fire-float">{isGoalkeeper ? "🧤" : "🔥"}</span>
+                ) : isGoalkeeper ? (
                   <span className="text-xl">🧤</span>
-                ) : isClutch ? (
-                  <span className="text-xl animate-fire-float">🔥</span>
                 ) : (
                   <UserCircle className="text-muted-foreground" size={36} />
                 )}
@@ -205,7 +206,7 @@ const PlayersPage = () => {
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-gold text-gold-dark shrink-0 animate-pulse-soft">⭐ CRAQUE</span>
                   )}
                 </div>
-                <StarRating rating={player.rating ?? player.skills?.length ?? 2} />
+                <StarRating rating={playerRating} />
               </div>
             </button>
           );

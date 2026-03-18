@@ -170,7 +170,8 @@ const PlayersPage = () => {
       <main className="flex-1 divide-y divide-border mt-2">
         {filtered.map((player) => {
           const isGoalkeeper = player.position === "Goleiro";
-          const isClutch = player.rating === 5;
+          const playerRating = player.skills?.length ?? player.rating ?? 0;
+          const isClutch = playerRating === 5;
           return (
             <button
               key={player.id}

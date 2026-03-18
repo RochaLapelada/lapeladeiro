@@ -269,7 +269,7 @@ const PlayersPage = () => {
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">
                 {(["Linha", "Goleiro"] as PlayerPosition[]).map((pos) => (
-                  <button key={pos} onClick={() => setEditPosition(pos)}
+                  <button key={pos} onClick={() => { setEditPosition(pos); setEditSkills(pos === "Goleiro" ? ["gk_saves", "gk_no_blunder"] : ["defending", "teamwork"]); }}
                     className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-colors ${
                       editPosition === pos
                         ? pos === "Goleiro" ? "border-accent bg-accent/20 text-accent-foreground" : "border-primary bg-primary/10 text-primary"

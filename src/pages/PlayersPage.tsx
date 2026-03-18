@@ -206,7 +206,7 @@ const PlayersPage = () => {
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-gold text-gold-dark shrink-0 animate-pulse-soft">⭐ CRAQUE</span>
                   )}
                 </div>
-                <StarRating rating={player.rating ?? player.skills?.length ?? 2} />
+                <StarRating rating={playerRating} />
               </div>
             </button>
           );

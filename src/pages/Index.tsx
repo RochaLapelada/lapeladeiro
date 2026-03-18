@@ -16,12 +16,6 @@ const menuItems = [
     path: "/match",
   },
   {
-    title: "Sorteio de Times",
-    description: "Divida os jogadores de forma equilibrada",
-    icon: Swords,
-    path: "/draw",
-  },
-  {
     title: "Estatísticas",
     description: "Artilharia, cartões, total de jogos e etc...",
     icon: BarChart3,

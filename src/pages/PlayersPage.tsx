@@ -3,7 +3,7 @@ import { Plus, Search, UserCircle, Star, Pencil, Trash2 } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import StarRating from "@/components/StarRating";
 import { getPlayers, addPlayer, deletePlayer, updatePlayer } from "@/lib/data";
-import { Player, PlayerPosition, SKILL_CRITERIA, SkillId } from "@/lib/types";
+import { Player, PlayerPosition, SKILL_CRITERIA, SkillId, getSkillCriteriaForPosition, GOALKEEPER_SKILL_CRITERIA } from "@/lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
@@ -103,41 +103,45 @@ const PlayersPage = () => {
     setActionPlayer(null);
   };
 
-  const SkillSelector = ({ skills, onChange }: { skills: SkillId[]; onChange: (s: SkillId[]) => void }) => (
-    <div>
-      <label className="text-sm font-semibold text-card-foreground mb-2 block">
-        Nível do Jogador ({skills.length}/5 ⭐)
-      </label>
-      <div className="space-y-2">
-        {SKILL_CRITERIA.map((criteria) => {
-          const checked = skills.includes(criteria.id);
-          const isClutch = criteria.id === "clutch";
-          return (
-            <button
-              key={criteria.id}
-              type="button"
-              onClick={() => onChange(toggleSkill(skills, criteria.id))}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 text-left text-sm font-medium transition-colors ${
-                checked
-                  ? isClutch
-                    ? "border-gold bg-gold/10 text-gold-dark"
-                    : "border-primary bg-primary/10 text-primary"
-                  : "border-border bg-card text-muted-foreground"
-              }`}
-            >
-              <Checkbox checked={checked} className="pointer-events-none" />
-              <span className="text-base">{criteria.icon}</span>
-              <span className="flex-1">{criteria.label}</span>
-              {isClutch && checked && <span className="text-xs font-black">🔥 CRAQUE</span>}
-            </button>
-          );
-        })}
+  const SkillSelector = ({ skills, onChange, position }: { skills: SkillId[]; onChange: (s: SkillId[]) => void; position: PlayerPosition }) => {
+    const criteria = getSkillCriteriaForPosition(position);
+    const isGoalkeeper = position === "Goleiro";
+    return (
+      <div>
+        <label className="text-sm font-semibold text-card-foreground mb-2 block">
+          {isGoalkeeper ? "Nível do Goleiro" : "Nível do Jogador"} ({skills.length}/5 ⭐)
+        </label>
+        <div className="space-y-2">
+          {criteria.map((c) => {
+            const checked = skills.includes(c.id as SkillId);
+            const isTop = isGoalkeeper ? c.id === "gk_best" : c.id === "clutch";
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => onChange(toggleSkill(skills, c.id as SkillId))}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 text-left text-sm font-medium transition-colors ${
+                  checked
+                    ? isTop
+                      ? "border-gold bg-gold/10 text-gold-dark"
+                      : "border-primary bg-primary/10 text-primary"
+                    : "border-border bg-card text-muted-foreground"
+                }`}
+              >
+                <Checkbox checked={checked} className="pointer-events-none" />
+                <span className="text-base">{c.icon}</span>
+                <span className="flex-1">{c.label}</span>
+                {isTop && checked && <span className="text-xs font-black">{isGoalkeeper ? "👑 CRAQUE" : "🔥 CRAQUE"}</span>}
+              </button>
+            );
+          })}
+        </div>
+        <div className="mt-2">
+          <StarRating rating={skills.length} />
+        </div>
       </div>
-      <div className="mt-2">
-        <StarRating rating={skills.length} />
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col max-w-lg mx-auto">
@@ -220,7 +224,7 @@ const PlayersPage = () => {
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">
                 {(["Linha", "Goleiro"] as PlayerPosition[]).map((pos) => (
-                  <button key={pos} onClick={() => setNewPosition(pos)}
+                  <button key={pos} onClick={() => { setNewPosition(pos); setNewSkills(pos === "Goleiro" ? ["gk_saves", "gk_no_blunder"] : ["defending", "teamwork"]); }}
                     className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-colors ${
                       newPosition === pos
                         ? pos === "Goleiro" ? "border-accent bg-accent/20 text-accent-foreground" : "border-primary bg-primary/10 text-primary"
@@ -229,7 +233,7 @@ const PlayersPage = () => {
                 ))}
               </div>
             </div>
-            <SkillSelector skills={newSkills} onChange={setNewSkills} />
+            <SkillSelector skills={newSkills} onChange={setNewSkills} position={newPosition} />
             <Button onClick={handleAdd} className="w-full">Salvar</Button>
           </div>
         </DialogContent>
@@ -265,7 +269,7 @@ const PlayersPage = () => {
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">
                 {(["Linha", "Goleiro"] as PlayerPosition[]).map((pos) => (
-                  <button key={pos} onClick={() => setEditPosition(pos)}
+                  <button key={pos} onClick={() => { setEditPosition(pos); setEditSkills(pos === "Goleiro" ? ["gk_saves", "gk_no_blunder"] : ["defending", "teamwork"]); }}
                     className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm transition-colors ${
                       editPosition === pos
                         ? pos === "Goleiro" ? "border-accent bg-accent/20 text-accent-foreground" : "border-primary bg-primary/10 text-primary"
@@ -274,7 +278,7 @@ const PlayersPage = () => {
                 ))}
               </div>
             </div>
-            <SkillSelector skills={editSkills} onChange={setEditSkills} />
+            <SkillSelector skills={editSkills} onChange={setEditSkills} position={editPosition} />
             <div className="flex gap-2">
               <Button variant="outline" className="flex-1" onClick={() => setShowEditDialog(false)}>Cancelar</Button>
               <Button className="flex-1" onClick={handleEdit}>Salvar Alterações</Button>

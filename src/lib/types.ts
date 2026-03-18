@@ -1,12 +1,22 @@
 export type PlayerPosition = "Goleiro" | "Linha";
 
-export const SKILL_CRITERIA = [
+export const FIELD_SKILL_CRITERIA = [
   { id: "shooting", label: "Chuta bem", icon: "🎯" },
   { id: "scoring", label: "Faz bastante gol", icon: "⚽" },
   { id: "defending", label: "Ajuda na marcação", icon: "🛡️" },
   { id: "teamwork", label: "Joga em equipe", icon: "🤝" },
   { id: "clutch", label: "Resolve a partida", icon: "🔥" },
 ] as const;
+
+export const GOALKEEPER_SKILL_CRITERIA = [
+  { id: "gk_best", label: "É o melhor jogador do time?", icon: "👑" },
+  { id: "gk_saves", label: "Faz defesas difíceis?", icon: "🧤" },
+  { id: "gk_no_blunder", label: "Não toma frango?", icon: "🚫" },
+  { id: "gk_feet", label: "Sabe trabalhar com os pés?", icon: "👟" },
+  { id: "gk_launch", label: "Faz lançamentos para ataque?", icon: "🚀" },
+] as const;
+
+export const SKILL_CRITERIA = FIELD_SKILL_CRITERIA;
 
 export type SkillId = typeof SKILL_CRITERIA[number]["id"];
 

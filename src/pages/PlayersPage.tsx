@@ -114,7 +114,7 @@ const PlayersPage = () => {
         <div className="space-y-2">
           {criteria.map((c) => {
             const checked = skills.includes(c.id as SkillId);
-            const isTop = isGoalkeeper ? c.id === "gk_best" : c.id === "clutch";
+            const isTop = (isGoalkeeper ? c.id === "gk_best" : c.id === "clutch") && skills.length === 5;
             return (
               <button
                 key={c.id}

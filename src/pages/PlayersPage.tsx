@@ -3,7 +3,7 @@ import { Plus, Search, UserCircle, Star, Pencil, Trash2 } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import StarRating from "@/components/StarRating";
 import { getPlayers, addPlayer, deletePlayer, updatePlayer } from "@/lib/data";
-import { Player, PlayerPosition, SKILL_CRITERIA, SkillId } from "@/lib/types";
+import { Player, PlayerPosition, SKILL_CRITERIA, SkillId, getSkillCriteriaForPosition, GOALKEEPER_SKILL_CRITERIA } from "@/lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";

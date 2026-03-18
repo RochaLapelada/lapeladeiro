@@ -233,7 +233,7 @@ const PlayersPage = () => {
                 ))}
               </div>
             </div>
-            <SkillSelector skills={newSkills} onChange={setNewSkills} />
+            <SkillSelector skills={newSkills} onChange={setNewSkills} position={newPosition} />
             <Button onClick={handleAdd} className="w-full">Salvar</Button>
           </div>
         </DialogContent>

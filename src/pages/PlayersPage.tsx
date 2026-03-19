@@ -51,6 +51,7 @@ const PlayersPage = () => {
     if (!newName.trim()) return;
     addPlayer({
       name: newName.trim(),
+      favoriteTeam: newTeam.trim() || undefined,
       rating: newSkills.length,
       skills: newSkills,
       position: newPosition,
@@ -60,6 +61,7 @@ const PlayersPage = () => {
     });
     setPlayers(getPlayers());
     setNewName("");
+    setNewTeam("");
     setNewPosition("Linha");
     setNewSkills(["defending", "teamwork"]);
     setNewStar(false);

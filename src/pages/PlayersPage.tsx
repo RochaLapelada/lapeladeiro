@@ -28,6 +28,7 @@ const PlayersPage = () => {
   const [editPosition, setEditPosition] = useState<PlayerPosition>("Linha");
   const [editSkills, setEditSkills] = useState<SkillId[]>([]);
   const [editStar, setEditStar] = useState(false);
+  const [editTeam, setEditTeam] = useState("");
 
   // Action menu / delete confirm
   const [actionPlayer, setActionPlayer] = useState<Player | null>(null);

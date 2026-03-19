@@ -89,6 +89,7 @@ const PlayersPage = () => {
     if (!editPlayer || !editName.trim()) return;
     updatePlayer(editPlayer.id, {
       name: editName.trim(),
+      favoriteTeam: editTeam.trim() || undefined,
       position: editPosition,
       positions: editPosition === "Goleiro" ? ["GL"] : [],
       rating: editSkills.length,

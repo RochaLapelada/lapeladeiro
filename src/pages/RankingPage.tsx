@@ -1,4 +1,5 @@
 import { UserCircle, Trophy } from "lucide-react";
+import { TeamBadgeByName } from "@/components/TeamAutocomplete";
 import AppHeader from "@/components/AppHeader";
 import { getPlayers } from "@/lib/data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

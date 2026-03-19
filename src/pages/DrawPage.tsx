@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TeamBadgeByName } from "@/components/TeamAutocomplete";
 import { Shuffle, UserCircle } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import { getPlayers, sortTeams } from "@/lib/data";

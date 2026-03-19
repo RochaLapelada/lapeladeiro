@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Plus, Search, UserCircle, Star, Pencil, Trash2 } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import StarRating from "@/components/StarRating";
+import TeamAutocomplete, { TeamBadgeByName } from "@/components/TeamAutocomplete";
 import { getPlayers, addPlayer, deletePlayer, updatePlayer } from "@/lib/data";
 import { Player, PlayerPosition, SKILL_CRITERIA, SkillId, getSkillCriteriaForPosition, GOALKEEPER_SKILL_CRITERIA } from "@/lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";

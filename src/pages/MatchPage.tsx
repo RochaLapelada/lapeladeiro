@@ -140,7 +140,7 @@ const MatchPage = () => {
             )}
             <div className="flex-1 min-w-0">
               <span className="font-semibold text-sm text-card-foreground">{p.name}</span>
-              {p.favoriteTeam && <p className="text-[10px] font-semibold text-primary truncate">🛡️ {p.favoriteTeam}</p>}
+              {p.favoriteTeam && <p className="text-[10px] font-semibold text-muted-foreground truncate flex items-center gap-1"><TeamBadgeByName name={p.favoriteTeam} /> {p.favoriteTeam}</p>}
             </div>
             {isGoalkeeper && (
               <span className="text-[9px] font-black px-1 py-0.5 rounded bg-accent text-accent-foreground">GL</span>

@@ -69,7 +69,7 @@ const RankingPage = () => {
                   <span className="text-[9px] font-black px-1 py-0.5 rounded bg-accent text-accent-foreground">GOLEIRO</span>
                 )}
               </div>
-              {p.favoriteTeam && <p className="text-[10px] font-semibold text-primary truncate">🛡️ {p.favoriteTeam}</p>}
+              {p.favoriteTeam && <p className="text-[10px] font-semibold text-muted-foreground truncate flex items-center gap-1"><TeamBadgeByName name={p.favoriteTeam} /> {p.favoriteTeam}</p>}
               <p className="text-xs text-muted-foreground">
                 {p.wins}V {p.draws}E {p.losses}D · {p.matches}J
               </p>

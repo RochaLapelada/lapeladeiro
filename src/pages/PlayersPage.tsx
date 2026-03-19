@@ -16,6 +16,7 @@ const PlayersPage = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [newName, setNewName] = useState("");
+  const [newTeam, setNewTeam] = useState("");
   const [newPosition, setNewPosition] = useState<PlayerPosition>("Linha");
   const [newSkills, setNewSkills] = useState<SkillId[]>(["defending", "teamwork"]);
   const [newStar, setNewStar] = useState(false);

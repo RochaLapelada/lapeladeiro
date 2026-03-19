@@ -1,4 +1,5 @@
 import { UserCircle, Trophy } from "lucide-react";
+import { TeamBadgeByName } from "@/components/TeamAutocomplete";
 import AppHeader from "@/components/AppHeader";
 import { getPlayers } from "@/lib/data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -37,7 +38,7 @@ const RankingPage = () => {
                   )}
                 </div>
                 <p className="text-xs font-bold text-card-foreground mt-1 truncate max-w-[80px]">{p.name}</p>
-                {p.favoriteTeam && <p className="text-[9px] font-semibold text-primary truncate max-w-[80px]">🛡️ {p.favoriteTeam}</p>}
+                {p.favoriteTeam && <p className="text-[9px] font-semibold text-muted-foreground truncate max-w-[80px] flex items-center gap-0.5 justify-center"><TeamBadgeByName name={p.favoriteTeam} size={12} /> {p.favoriteTeam}</p>}
                 <span className={`text-xs font-bold px-2 py-0.5 rounded-full mt-1 ${isFirst ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground"}`}>
                   {pos}º
                 </span>
@@ -69,7 +70,7 @@ const RankingPage = () => {
                   <span className="text-[9px] font-black px-1 py-0.5 rounded bg-accent text-accent-foreground">GOLEIRO</span>
                 )}
               </div>
-              {p.favoriteTeam && <p className="text-[10px] font-semibold text-primary truncate">🛡️ {p.favoriteTeam}</p>}
+              {p.favoriteTeam && <p className="text-[10px] font-semibold text-muted-foreground truncate flex items-center gap-1"><TeamBadgeByName name={p.favoriteTeam} /> {p.favoriteTeam}</p>}
               <p className="text-xs text-muted-foreground">
                 {p.wins}V {p.draws}E {p.losses}D · {p.matches}J
               </p>

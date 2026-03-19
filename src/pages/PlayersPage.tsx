@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Plus, Search, UserCircle, Star, Pencil, Trash2 } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import StarRating from "@/components/StarRating";
+import TeamAutocomplete, { TeamBadgeByName } from "@/components/TeamAutocomplete";
 import { getPlayers, addPlayer, deletePlayer, updatePlayer } from "@/lib/data";
 import { Player, PlayerPosition, SKILL_CRITERIA, SkillId, getSkillCriteriaForPosition, GOALKEEPER_SKILL_CRITERIA } from "@/lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -213,7 +214,9 @@ const PlayersPage = () => {
                   )}
                 </div>
                 {player.favoriteTeam && (
-                  <p className="text-[11px] font-semibold text-primary truncate">🛡️ {player.favoriteTeam}</p>
+                  <p className="text-[11px] font-semibold text-muted-foreground truncate flex items-center gap-1">
+                    <TeamBadgeByName name={player.favoriteTeam} size={14} /> {player.favoriteTeam}
+                  </p>
                 )}
                 <StarRating rating={playerRating} />
               </div>
@@ -230,7 +233,7 @@ const PlayersPage = () => {
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <Input placeholder="Nome do jogador" value={newName} onChange={(e) => setNewName(e.target.value)} />
-            <Input placeholder="Time que torce (opcional)" value={newTeam} onChange={(e) => setNewTeam(e.target.value)} />
+            <TeamAutocomplete value={newTeam} onChange={setNewTeam} />
             <div>
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">
@@ -276,7 +279,7 @@ const PlayersPage = () => {
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <Input placeholder="Nome do jogador" value={editName} onChange={(e) => setEditName(e.target.value)} />
-            <Input placeholder="Time que torce (opcional)" value={editTeam} onChange={(e) => setEditTeam(e.target.value)} />
+            <TeamAutocomplete value={editTeam} onChange={setEditTeam} />
             <div>
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">

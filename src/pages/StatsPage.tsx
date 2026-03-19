@@ -92,6 +92,7 @@ const StatSection = ({ title, players, stat }: StatSectionProps) => {
         <UserCircle className="text-muted-foreground shrink-0" size={48} />
         <div>
           <p className="font-bold text-card-foreground">{top.name}</p>
+          {top.favoriteTeam && <p className="text-[10px] font-semibold text-primary">🛡️ {top.favoriteTeam}</p>}
           <p className="text-sm text-muted-foreground">{stat(top)}</p>
         </div>
       </div>

@@ -138,7 +138,10 @@ const MatchPage = () => {
             ) : (
               <UserCircle className="text-muted-foreground shrink-0" size={20} />
             )}
-            <span className="font-semibold text-sm text-card-foreground flex-1">{p.name}</span>
+            <div className="flex-1 min-w-0">
+              <span className="font-semibold text-sm text-card-foreground">{p.name}</span>
+              {p.favoriteTeam && <p className="text-[10px] font-semibold text-primary truncate">🛡️ {p.favoriteTeam}</p>}
+            </div>
             {isGoalkeeper && (
               <span className="text-[9px] font-black px-1 py-0.5 rounded bg-accent text-accent-foreground">GL</span>
             )}

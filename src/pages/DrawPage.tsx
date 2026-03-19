@@ -91,6 +91,7 @@ const DrawPage = () => {
                         <UserCircle className="text-muted-foreground shrink-0" size={24} />
                         <div>
                           <p className="text-sm font-semibold text-card-foreground">{p.name}</p>
+                          {p.favoriteTeam && <p className="text-[10px] font-semibold text-primary truncate">🛡️ {p.favoriteTeam}</p>}
                           <p className="text-xs text-muted-foreground">{p.positions.join(", ")}</p>
                         </div>
                       </div>

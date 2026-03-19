@@ -212,6 +212,9 @@ const PlayersPage = () => {
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-gold text-gold-dark shrink-0 animate-pulse-soft">⭐ CRAQUE</span>
                   )}
                 </div>
+                {player.favoriteTeam && (
+                  <p className="text-[11px] font-semibold text-primary truncate">🛡️ {player.favoriteTeam}</p>
+                )}
                 <StarRating rating={playerRating} />
               </div>
             </button>

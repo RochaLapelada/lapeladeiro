@@ -277,7 +277,7 @@ const PlayersPage = () => {
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <Input placeholder="Nome do jogador" value={editName} onChange={(e) => setEditName(e.target.value)} />
-            <Input placeholder="Time que torce (opcional)" value={editTeam} onChange={(e) => setEditTeam(e.target.value)} />
+            <TeamAutocomplete value={editTeam} onChange={setEditTeam} />
             <div>
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">

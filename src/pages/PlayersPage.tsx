@@ -214,7 +214,9 @@ const PlayersPage = () => {
                   )}
                 </div>
                 {player.favoriteTeam && (
-                  <p className="text-[11px] font-semibold text-primary truncate">🛡️ {player.favoriteTeam}</p>
+                  <p className="text-[11px] font-semibold text-muted-foreground truncate flex items-center gap-1">
+                    <TeamBadgeByName name={player.favoriteTeam} size={14} /> {player.favoriteTeam}
+                  </p>
                 )}
                 <StarRating rating={playerRating} />
               </div>

@@ -64,6 +64,7 @@ const StatsPage = () => {
               <UserCircle className="text-muted-foreground shrink-0" size={40} />
               <div className="flex-1">
                 <p className="font-bold text-card-foreground">{p.name}</p>
+                {p.favoriteTeam && <p className="text-[10px] font-semibold text-primary">🛡️ {p.favoriteTeam}</p>}
                 <p className="text-sm text-muted-foreground">{p.goals} gols</p>
               </div>
             </div>
@@ -91,6 +92,7 @@ const StatSection = ({ title, players, stat }: StatSectionProps) => {
         <UserCircle className="text-muted-foreground shrink-0" size={48} />
         <div>
           <p className="font-bold text-card-foreground">{top.name}</p>
+          {top.favoriteTeam && <p className="text-[10px] font-semibold text-primary">🛡️ {top.favoriteTeam}</p>}
           <p className="text-sm text-muted-foreground">{stat(top)}</p>
         </div>
       </div>

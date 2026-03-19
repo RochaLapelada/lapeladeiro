@@ -16,6 +16,7 @@ const PlayersPage = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [newName, setNewName] = useState("");
+  const [newTeam, setNewTeam] = useState("");
   const [newPosition, setNewPosition] = useState<PlayerPosition>("Linha");
   const [newSkills, setNewSkills] = useState<SkillId[]>(["defending", "teamwork"]);
   const [newStar, setNewStar] = useState(false);
@@ -27,6 +28,7 @@ const PlayersPage = () => {
   const [editPosition, setEditPosition] = useState<PlayerPosition>("Linha");
   const [editSkills, setEditSkills] = useState<SkillId[]>([]);
   const [editStar, setEditStar] = useState(false);
+  const [editTeam, setEditTeam] = useState("");
 
   // Action menu / delete confirm
   const [actionPlayer, setActionPlayer] = useState<Player | null>(null);
@@ -49,6 +51,7 @@ const PlayersPage = () => {
     if (!newName.trim()) return;
     addPlayer({
       name: newName.trim(),
+      favoriteTeam: newTeam.trim() || undefined,
       rating: newSkills.length,
       skills: newSkills,
       position: newPosition,
@@ -58,6 +61,7 @@ const PlayersPage = () => {
     });
     setPlayers(getPlayers());
     setNewName("");
+    setNewTeam("");
     setNewPosition("Linha");
     setNewSkills(["defending", "teamwork"]);
     setNewStar(false);
@@ -73,6 +77,7 @@ const PlayersPage = () => {
     if (!actionPlayer) return;
     setEditPlayer(actionPlayer);
     setEditName(actionPlayer.name);
+    setEditTeam(actionPlayer.favoriteTeam || "");
     setEditPosition(actionPlayer.position);
     setEditSkills(actionPlayer.skills || ["defending", "teamwork"]);
     setEditStar(actionPlayer.star);
@@ -84,6 +89,7 @@ const PlayersPage = () => {
     if (!editPlayer || !editName.trim()) return;
     updatePlayer(editPlayer.id, {
       name: editName.trim(),
+      favoriteTeam: editTeam.trim() || undefined,
       position: editPosition,
       positions: editPosition === "Goleiro" ? ["GL"] : [],
       rating: editSkills.length,
@@ -206,6 +212,9 @@ const PlayersPage = () => {
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-gold text-gold-dark shrink-0 animate-pulse-soft">⭐ CRAQUE</span>
                   )}
                 </div>
+                {player.favoriteTeam && (
+                  <p className="text-[11px] font-semibold text-primary truncate">🛡️ {player.favoriteTeam}</p>
+                )}
                 <StarRating rating={playerRating} />
               </div>
             </button>
@@ -221,6 +230,7 @@ const PlayersPage = () => {
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <Input placeholder="Nome do jogador" value={newName} onChange={(e) => setNewName(e.target.value)} />
+            <Input placeholder="Time que torce (opcional)" value={newTeam} onChange={(e) => setNewTeam(e.target.value)} />
             <div>
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">
@@ -266,6 +276,7 @@ const PlayersPage = () => {
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <Input placeholder="Nome do jogador" value={editName} onChange={(e) => setEditName(e.target.value)} />
+            <Input placeholder="Time que torce (opcional)" value={editTeam} onChange={(e) => setEditTeam(e.target.value)} />
             <div>
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">

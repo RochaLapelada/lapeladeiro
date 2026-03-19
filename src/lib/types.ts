@@ -44,6 +44,7 @@ export interface Player {
   losses: number;
   draws: number;
   avatar?: string;
+  favoriteTeam?: string;
 }
 
 export interface MatchEvent {

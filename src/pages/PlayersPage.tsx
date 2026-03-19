@@ -77,6 +77,7 @@ const PlayersPage = () => {
     if (!actionPlayer) return;
     setEditPlayer(actionPlayer);
     setEditName(actionPlayer.name);
+    setEditTeam(actionPlayer.favoriteTeam || "");
     setEditPosition(actionPlayer.position);
     setEditSkills(actionPlayer.skills || ["defending", "teamwork"]);
     setEditStar(actionPlayer.star);

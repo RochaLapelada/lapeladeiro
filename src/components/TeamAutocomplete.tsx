@@ -7,25 +7,34 @@ interface TeamAutocompleteProps {
   onChange: (value: string) => void;
 }
 
-const TeamBadge = ({ team, size = 24 }: { team: BrazilianTeam; size?: number }) => (
-  <div
-    className="rounded-full flex items-center justify-center shrink-0 font-black"
-    style={{
-      width: size,
-      height: size,
-      backgroundColor: team.color,
-      color: team.textColor,
-      fontSize: size * 0.35,
+const TeamLogo = ({ team, size = 24 }: { team: BrazilianTeam; size?: number }) => (
+  <img
+    src={team.logo}
+    alt={team.name}
+    width={size}
+    height={size}
+    className="rounded-full object-contain shrink-0"
+    onError={(e) => {
+      // Fallback to colored badge with abbreviation
+      const el = e.currentTarget;
+      el.style.display = "none";
+      const fallback = document.createElement("div");
+      fallback.className = "rounded-full flex items-center justify-center shrink-0 font-black";
+      fallback.style.width = `${size}px`;
+      fallback.style.height = `${size}px`;
+      fallback.style.backgroundColor = team.color;
+      fallback.style.color = team.textColor;
+      fallback.style.fontSize = `${size * 0.35}px`;
+      fallback.textContent = team.abbr.slice(0, 2);
+      el.parentElement?.appendChild(fallback);
     }}
-  >
-    {team.abbr.slice(0, 2)}
-  </div>
+  />
 );
 
 export const TeamBadgeByName = ({ name, size = 14 }: { name: string; size?: number }) => {
   const team = BRAZILIAN_TEAMS.find(t => t.name.toLowerCase() === name.toLowerCase());
   if (!team) return <span className="text-[10px]">🛡️</span>;
-  return <TeamBadge team={team} size={size} />;
+  return <TeamLogo team={team} size={size} />;
 };
 
 const TeamAutocomplete = ({ value, onChange }: TeamAutocompleteProps) => {
@@ -75,7 +84,7 @@ const TeamAutocomplete = ({ value, onChange }: TeamAutocompleteProps) => {
               onClick={() => select(team)}
               className="w-full flex items-center gap-2.5 px-3 py-2 text-left text-sm hover:bg-secondary/60 transition-colors"
             >
-              <TeamBadge team={team} size={22} />
+              <TeamLogo team={team} size={22} />
               <span className="font-semibold text-card-foreground">{team.name}</span>
               <span className="text-[10px] text-muted-foreground ml-auto">Série {team.serie}</span>
             </button>

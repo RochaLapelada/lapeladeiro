@@ -21,6 +21,7 @@ const PlayersPage = () => {
   const [newPosition, setNewPosition] = useState<PlayerPosition>("Linha");
   const [newSkills, setNewSkills] = useState<SkillId[]>(["defending", "teamwork"]);
   const [newStar, setNewStar] = useState(false);
+  const [formErrors, setFormErrors] = useState<{ name?: string; team?: string }>({});
 
   // Edit state
   const [editPlayer, setEditPlayer] = useState<Player | null>(null);
@@ -30,6 +31,7 @@ const PlayersPage = () => {
   const [editSkills, setEditSkills] = useState<SkillId[]>([]);
   const [editStar, setEditStar] = useState(false);
   const [editTeam, setEditTeam] = useState("");
+  const [editErrors, setEditErrors] = useState<{ name?: string; team?: string }>({});
 
   // Action menu / delete confirm
   const [actionPlayer, setActionPlayer] = useState<Player | null>(null);
@@ -49,7 +51,11 @@ const PlayersPage = () => {
   };
 
   const handleAdd = () => {
-    if (!newName.trim()) return;
+    const errors: { name?: string; team?: string } = {};
+    if (!newName.trim()) errors.name = "Nome é obrigatório";
+    if (!newTeam.trim()) errors.team = "Time é obrigatório";
+    if (Object.keys(errors).length > 0) { setFormErrors(errors); return; }
+    setFormErrors({});
     addPlayer({
       name: newName.trim(),
       favoriteTeam: newTeam.trim() || undefined,
@@ -87,7 +93,12 @@ const PlayersPage = () => {
   };
 
   const handleEdit = () => {
-    if (!editPlayer || !editName.trim()) return;
+    const errors: { name?: string; team?: string } = {};
+    if (!editName.trim()) errors.name = "Nome é obrigatório";
+    if (!editTeam.trim()) errors.team = "Time é obrigatório";
+    if (Object.keys(errors).length > 0) { setEditErrors(errors); return; }
+    setEditErrors({});
+    if (!editPlayer) return;
     updatePlayer(editPlayer.id, {
       name: editName.trim(),
       favoriteTeam: editTeam.trim() || undefined,
@@ -232,8 +243,14 @@ const PlayersPage = () => {
             <DialogTitle>Cadastrar Novo Jogador</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-2">
-            <Input placeholder="Nome do jogador" value={newName} onChange={(e) => setNewName(e.target.value)} />
-            <TeamAutocomplete value={newTeam} onChange={setNewTeam} />
+            <div>
+              <Input placeholder="Nome do jogador" value={newName} onChange={(e) => { setNewName(e.target.value); setFormErrors(prev => ({ ...prev, name: undefined })); }} className={formErrors.name ? "border-destructive" : ""} />
+              {formErrors.name && <p className="text-xs text-destructive mt-1">{formErrors.name}</p>}
+            </div>
+            <div>
+              <TeamAutocomplete value={newTeam} onChange={(v) => { setNewTeam(v); setFormErrors(prev => ({ ...prev, team: undefined })); }} />
+              {formErrors.team && <p className="text-xs text-destructive mt-1">{formErrors.team}</p>}
+            </div>
             <div>
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">
@@ -278,8 +295,14 @@ const PlayersPage = () => {
             <DialogTitle>Editar Jogador</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-2">
-            <Input placeholder="Nome do jogador" value={editName} onChange={(e) => setEditName(e.target.value)} />
-            <TeamAutocomplete value={editTeam} onChange={setEditTeam} />
+            <div>
+              <Input placeholder="Nome do jogador" value={editName} onChange={(e) => { setEditName(e.target.value); setEditErrors(prev => ({ ...prev, name: undefined })); }} className={editErrors.name ? "border-destructive" : ""} />
+              {editErrors.name && <p className="text-xs text-destructive mt-1">{editErrors.name}</p>}
+            </div>
+            <div>
+              <TeamAutocomplete value={editTeam} onChange={(v) => { setEditTeam(v); setEditErrors(prev => ({ ...prev, team: undefined })); }} />
+              {editErrors.team && <p className="text-xs text-destructive mt-1">{editErrors.team}</p>}
+            </div>
             <div>
               <label className="text-sm font-semibold text-card-foreground mb-1 block">Posição</label>
               <div className="flex gap-2">
